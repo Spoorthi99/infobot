@@ -1,0 +1,64 @@
+[import](common.lg)
+
+# SendActivity_241579
+-${SigninCard()}
+
+# SendActivity_901582
+-${AnimationCard()}
+
+# SendActivity_553859
+-${VideoCard()}
+
+# SendActivity_190928
+-${AudioCard()}
+
+# SendActivity_806895
+-${AdaptiveCard()}
+
+# SendActivity_997450
+-${AllCards()}
+
+# SendActivity_729500()
+-Welcome to Information chat Bot.
+# TextInput_Prompt_H1bTnF()
+- Enter city name:
+# ChoiceInput_Prompt_359223()
+- Which information would you want to display?
+# SendActivity_VLMUco()
+  [ThumbnailCard
+    title = Weather for ${user.city}
+    text = The temperature is ${user.mul.main.temp} , The minimum temperature today is ${user.mul.main.temp_min} , The maximum temperature today is ${user.mul.main.temp_max} , The pressure today is ${user.mul.main.pressure}mm , The humidity today is ${user.mul.main.humidity}
+]
+# TextInput_Prompt_2aY8IV()
+- Enter country:
+# SendActivity_1H5BHx()
+  [ThumbnailCard
+    title = Covid-19 report for ${user.country}
+    text = The recovered cases are ${dialog.res2.content.data.recovered} , The number of deaths are ${dialog.res2.content.data.deaths} , The number of confirmed cases are ${dialog.res2.content.data.confirmed}, The last checked status is ${dialog.res2.content.data.lastChecked}, The last reported status is ${dialog.res2.content.data.lastReported}
+]
+# TextInput_Prompt_uO0RsA()
+- Enter a movie name:
+# SendActivity_Jw1FSQ()
+  [ThumbnailCard
+    title = Movie review for ${user.movie}
+    text = The Title is ${dialog.res4.content.Title} . The release date is  ${dialog.res4.content.Released} . The Genre is  ${dialog.res4.content.Genre} . The director is  ${dialog.res4.content.Director} . The writer is  ${dialog.res4.content.Writer} . The actors are  ${dialog.res4.content.Actors} . The plot is  ${dialog.res4.content.Plot} . The Awards are  ${dialog.res4.content.Awards} . The rating is  ${dialog.res4.content.Ratings[0].Value}.
+    image =  ${dialog.res4.content.Poster}
+]
+# SendActivity_di4185()
+- Enter a text to continue!
+# SendActivity_6fmASg()
+- Enter a text to continue!
+# SendActivity_wnCIPZ()
+- Enter a text to cotinue!
+# SendActivity_hhX7n4()
+- Please choose from the above options only.
+# TextInput_Prompt_W2D86u()
+- Enter the word:
+
+# SendActivity_jgoZIJ()
+  [ThumbnailCard
+    title = Information for the word, ${user.word}
+    text = ${dialog.res4.content.list[0].definition}. An example is, ${dialog.res4.content.list[0].example}
+]
+# SendActivity_v8ZXAf()
+- Enter any text to continue!

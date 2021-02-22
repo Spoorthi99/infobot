@@ -1,0 +1,328 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "937757",
+    "description": "",
+    "name": "RespondingWithCardsSample-0"
+  },
+  "autoEndDialog": false,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnUnknownIntent",
+      "actions": [
+        {
+          "$kind": "Microsoft.ChoiceInput",
+          "$designer": {
+            "id": "359223"
+          },
+          "prompt": "${ChoiceInput_Prompt_359223()}",
+          "maxTurnCount": "2147483647",
+          "property": "user.choice",
+          "alwaysPrompt": true,
+          "allowInterruptions": "false",
+          "outputFormat": "value",
+          "choices": [
+            {
+              "value": "WEATHER AT YOUR PLACE"
+            },
+            {
+              "value": "COVID-19 UPDATES"
+            },
+            {
+              "value": "MOVIE REVIEWS"
+            },
+            {
+              "value": "DICTIONARY"
+            }
+          ],
+          "defaultLocale": "en-us",
+          "style": "list",
+          "choiceOptions": {
+            "inlineSeparator": ", ",
+            "inlineOr": " or ",
+            "inlineOrMore": ", or ",
+            "includeNumbers": true
+          },
+          "recognizerOptions": {
+            "noValue": false,
+            "noAction": false
+          }
+        },
+        {
+          "$kind": "Microsoft.SwitchCondition",
+          "$designer": {
+            "id": "304837"
+          },
+          "condition": "user.choice",
+          "cases": [
+            {
+              "value": "WEATHER AT YOUR PLACE",
+              "actions": [
+                {
+                  "$kind": "Microsoft.TextInput",
+                  "$designer": {
+                    "id": "H1bTnF"
+                  },
+                  "disabled": false,
+                  "maxTurnCount": 3,
+                  "alwaysPrompt": true,
+                  "allowInterruptions": false,
+                  "prompt": "${TextInput_Prompt_H1bTnF()}",
+                  "unrecognizedPrompt": "",
+                  "invalidPrompt": "",
+                  "defaultValueResponse": "",
+                  "property": "user.city"
+                },
+                {
+                  "$kind": "Microsoft.HttpRequest",
+                  "$designer": {
+                    "id": "lC1iaZ"
+                  },
+                  "method": "GET",
+                  "headers": {
+                    "x-rapidapi-key": "24c0b97996msha8202782da46d00p117e1ajsnaa3dbf35338c",
+                    "x-rapidapi-host": "community-open-weather-map.p.rapidapi.com"
+                  },
+                  "resultProperty": "dialog.res",
+                  "contentType": "json(value)",
+                  "responseType": "json",
+                  "url": "https://community-open-weather-map.p.rapidapi.com/weather?q=+${user.city}+&callback=test&id=2172797&lang=null&units=%22metric%22%20or%20%22imperial%22&mode=xml%2C%20html"
+                },
+                {
+                  "$kind": "Microsoft.SetProperty",
+                  "$designer": {
+                    "id": "uMQqdI"
+                  },
+                  "property": "user.val",
+                  "value": "${(dialog.res.content)}"
+                },
+                {
+                  "$kind": "MultiplyDialog",
+                  "$designer": {
+                    "id": "DKepmY"
+                  },
+                  "arg1": "${user.val}",
+                  "arg2": "3",
+                  "resultProperty": "user.mul"
+                },
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "VLMUco"
+                  },
+                  "activity": "${SendActivity_VLMUco()}"
+                },
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "di4185"
+                  },
+                  "activity": "${SendActivity_di4185()}"
+                }
+              ]
+            },
+            {
+              "actions": [
+                {
+                  "$kind": "Microsoft.TextInput",
+                  "$designer": {
+                    "id": "2aY8IV"
+                  },
+                  "disabled": false,
+                  "maxTurnCount": 3,
+                  "alwaysPrompt": true,
+                  "allowInterruptions": false,
+                  "prompt": "${TextInput_Prompt_2aY8IV()}",
+                  "unrecognizedPrompt": "",
+                  "invalidPrompt": "",
+                  "defaultValueResponse": "",
+                  "property": "user.country"
+                },
+                {
+                  "$kind": "Microsoft.HttpRequest",
+                  "$designer": {
+                    "id": "fyvPbb"
+                  },
+                  "method": "GET",
+                  "url": "https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/total?country=+${user.country}",
+                  "headers": {
+                    "x-rapidapi-key": "fd74b1aa28msh70f986b3fe4ed5fp1a7869jsnde09d06d0757",
+                    "x-rapidapi-host": "covid-19-coronavirus-statistics.p.rapidapi.com"
+                  },
+                  "resultProperty": "dialog.res2",
+                  "contentType": "json",
+                  "responseType": "json"
+                },
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "1H5BHx"
+                  },
+                  "activity": "${SendActivity_1H5BHx()}"
+                },
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "6fmASg"
+                  },
+                  "activity": "${SendActivity_6fmASg()}"
+                }
+              ],
+              "value": "COVID-19 UPDATES"
+            },
+            {
+              "actions": [
+                {
+                  "$kind": "Microsoft.TextInput",
+                  "$designer": {
+                    "id": "uO0RsA"
+                  },
+                  "disabled": false,
+                  "maxTurnCount": 3,
+                  "alwaysPrompt": true,
+                  "allowInterruptions": false,
+                  "prompt": "${TextInput_Prompt_uO0RsA()}",
+                  "unrecognizedPrompt": "",
+                  "invalidPrompt": "",
+                  "defaultValueResponse": "",
+                  "property": "user.movie"
+                },
+                {
+                  "$kind": "Microsoft.HttpRequest",
+                  "$designer": {
+                    "id": "xaEUqA"
+                  },
+                  "method": "GET",
+                  "url": "http://www.omdbapi.com/?i=tt3896198&apikey=c0dbf829&t=+${user.movie}",
+                  "resultProperty": "dialog.res4",
+                  "contentType": "json",
+                  "responseType": "json"
+                },
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "Jw1FSQ"
+                  },
+                  "activity": "${SendActivity_Jw1FSQ()}"
+                },
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "wnCIPZ"
+                  },
+                  "activity": "${SendActivity_wnCIPZ()}"
+                }
+              ],
+              "value": "MOVIE REVIEWS"
+            },
+            {
+              "value": "DICTIONARY",
+              "actions": [
+                {
+                  "$kind": "Microsoft.TextInput",
+                  "$designer": {
+                    "id": "W2D86u"
+                  },
+                  "disabled": false,
+                  "maxTurnCount": 3,
+                  "alwaysPrompt": true,
+                  "allowInterruptions": false,
+                  "prompt": "${TextInput_Prompt_W2D86u()}",
+                  "unrecognizedPrompt": "",
+                  "invalidPrompt": "",
+                  "defaultValueResponse": "",
+                  "property": "user.word"
+                },
+                {
+                  "$kind": "Microsoft.HttpRequest",
+                  "$designer": {
+                    "id": "hEDj8w"
+                  },
+                  "method": "GET",
+                  "resultProperty": "dialog.res4",
+                  "contentType": "json",
+                  "responseType": "json",
+                  "headers": {
+                    "x-rapidapi-key": "24c0b97996msha8202782da46d00p117e1ajsnaa3dbf35338c",
+                    "x-rapidapi-host": "mashape-community-urban-dictionary.p.rapidapi.com"
+                  },
+                  "url": "https://mashape-community-urban-dictionary.p.rapidapi.com/define?term=+${user.word}"
+                },
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "jgoZIJ"
+                  },
+                  "activity": "${SendActivity_jgoZIJ()}"
+                },
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "v8ZXAf"
+                  },
+                  "activity": "${SendActivity_v8ZXAf()}"
+                }
+              ]
+            }
+          ],
+          "default": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "hhX7n4"
+              },
+              "activity": "${SendActivity_hhX7n4()}"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.RepeatDialog",
+          "$designer": {
+            "id": "831626"
+          }
+        }
+      ],
+      "$designer": {
+        "id": "392502"
+      }
+    },
+    {
+      "$kind": "Microsoft.OnConversationUpdateActivity",
+      "actions": [
+        {
+          "$kind": "Microsoft.Foreach",
+          "$designer": {
+            "id": "518944",
+            "name": "Loop: for each item"
+          },
+          "itemsProperty": "turn.Activity.membersAdded",
+          "actions": [
+            {
+              "$kind": "Microsoft.IfCondition",
+              "$designer": {
+                "id": "641773",
+                "name": "Branch: if/else"
+              },
+              "condition": "string(dialog.foreach.value.id) != string(turn.Activity.Recipient.id)",
+              "actions": [
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "729500",
+                    "name": "Send a response"
+                  },
+                  "activity": "${SendActivity_729500()}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "generator": "respondingwithcardssample-0.lg",
+  "$schema": "https://raw.githubusercontent.com/microsoft/BotFramework-Composer/stable/Composer/packages/server/schemas/sdk.schema",
+  "id": "RespondingWithCardsSample-0",
+  "recognizer": "respondingwithcardssample-0.lu.qna"
+}
